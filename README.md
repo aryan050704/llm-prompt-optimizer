@@ -1,23 +1,23 @@
-# LLM Prompt Optimizer
+# LLM Prompt Optimizer (lightweight version)
 
-Analyze and optimize LLM prompts for **token efficiency**, redundancy, and clarity. Includes a Streamlit dashboard and a Python library you can import directly.
+A smaller, standalone tool for checking token usage and tightening up prompts — built separately from my bigger final-year prompt optimizer project, more of a quick utility/library.
 
 ## Features
-- Token counting via `tiktoken` (supports GPT-3.5, GPT-4, GPT-4o tokenizers)
-- Redundancy detection — flags filler phrases that waste tokens
-- Clarity scoring — checks for missing output directives
-- Automatic prompt optimization with token savings report
-- Batch analysis for comparing multiple prompt variants
-- Live cost estimation
+- Token counting via `tiktoken` (GPT-3.5/4/4o tokenizers)
+- Flags filler phrases that waste tokens
+- Basic clarity check — flags prompts missing a clear output directive
+- Rewrites the prompt and reports token savings
+- Batch mode to compare multiple prompt variants at once
+- Rough cost estimate based on token count
 
-## Run the Dashboard
+## Running the dashboard
 
 ```bash
 pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## Use as a Library
+## Using it as a library
 
 ```python
 from optimizer import analyze, report
@@ -28,8 +28,6 @@ print(report(result))
 # Optimized: "Summarize the following text briefly."
 ```
 
-## Batch Analysis
-
 ```python
 from optimizer import batch_analyze
 
@@ -37,5 +35,9 @@ prompts = ["Can you please help me...", "Generate a list of..."]
 results = batch_analyze(prompts)
 ```
 
-## Tech Stack
-`Python` `tiktoken` `Streamlit` `Regex`
+## Stack
+Python, tiktoken, Streamlit, regex
+
+## Notes
+- Redundancy detection is just a list of common filler phrases, not a learned model
+- Clarity scoring is rule-based, would need more cases to catch subtler issues
